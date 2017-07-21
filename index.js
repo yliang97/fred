@@ -42,7 +42,7 @@ app.post('/webhook', function (req, res) {
       entry.messaging.forEach(function(event) {
         if (event.message) {
           receivedMessage(event);
-        } else if (event.postback)
+        } else if (event.postback) {
           receivedPostback(event);
         }
       });
@@ -188,6 +188,8 @@ function receivedPostback(event) {
   // let them know it was successful
   sendTextMessage(senderID, "Postback called");
 }
+
+
 
 // Spin up the server
 app.listen(app.get('port'), function() {

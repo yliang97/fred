@@ -33,6 +33,9 @@ app.post('/webhook', function (req, res) {
   // Make sure this is a page subscription
   if (data.object === 'page') {
 
+	// Send greeting message
+	sendGreeting();
+
     // Iterate over each entry - there may be multiple if batched
     data.entry.forEach(function(entry) {
       var pageID = entry.id;
@@ -47,8 +50,6 @@ app.post('/webhook', function (req, res) {
         }
       });
     });
-
-
     // Assume all went well.
     //
     // You must send back a 200, within 20 seconds, to let us know
@@ -58,6 +59,18 @@ app.post('/webhook', function (req, res) {
   }
 });
   
+function sendGreeting() {
+	curl -X POST -H "Content-Type: application/json" -d '{
+	  "recipient": { 
+	    "id": "USER_ID"
+	  },
+	  "message": {
+	    "text": "hello, world!"
+	  }
+	}' "https://graph.facebook.com/v2.6/me/messages?access_token=" + token
+} 
+
+
 function receivedMessage(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
@@ -150,6 +163,7 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
+// Calling send API 
 function callSendAPI(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -172,6 +186,7 @@ function callSendAPI(messageData) {
   });  
 }
 
+// What to do after receiving the Postback
 function receivedPostback(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
@@ -188,6 +203,8 @@ function receivedPostback(event) {
   // let them know it was successful
   sendTextMessage(senderID, "Postback called");
 }
+
+
 
 
 

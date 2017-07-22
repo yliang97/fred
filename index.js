@@ -34,7 +34,7 @@ app.post('/webhook', function (req, res) {
   if (data.object === 'page') {
 
 	// Send greeting message
-	sendGreeting();
+	//sendGreeting();
 
     // Iterate over each entry - there may be multiple if batched
     data.entry.forEach(function(entry) {

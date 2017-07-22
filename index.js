@@ -59,16 +59,16 @@ app.post('/webhook', function (req, res) {
   }
 });
   
-function sendGreeting() {
-	curl -X POST -H "Content-Type: application/json" -d '{
-	  "recipient": { 
-	    "id": "USER_ID"
-	  },
-	  "message": {
-	    "text": "hello, world!"
-	  }
-	}' "https://graph.facebook.com/v2.6/me/messages?access_token=" + token
-} 
+// function sendGreeting() {
+// 	curl -X POST -H "Content-Type: application/json" -d '{
+// 	  "recipient": { 
+// 	    "id": "USER_ID"
+// 	  },
+// 	  "message": {
+// 	    "text": "hello, world!"
+// 	  }
+// 	}' "https://graph.facebook.com/v2.6/me/messages?access_token=" + token
+// } 
 
 
 function receivedMessage(event) {

@@ -33,8 +33,6 @@ app.post('/webhook', function (req, res) {
   // Make sure this is a page subscription
   if (data.object === 'page') {
 
-	// Send greeting message
-	//sendGreeting();
 
     // Iterate over each entry - there may be multiple if batched
     data.entry.forEach(function(entry) {
@@ -44,7 +42,8 @@ app.post('/webhook', function (req, res) {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
         if (event.message) {
-          receivedMessage(event);
+          //receivedMessage(event);
+          processMessage(event);
         } else if (event.postback) {
           receivedPostback(event);
         }
@@ -58,18 +57,22 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
   }
 });
-  
-// function sendGreeting() {
-// 	curl -X POST -H "Content-Type: application/json" -d '{
-// 	  "recipient": { 
-// 	    "id": "USER_ID"
-// 	  },
-// 	  "message": {
-// 	    "text": "hello, world!"
-// 	  }
-// 	}' "https://graph.facebook.com/v2.6/me/messages?access_token=" + token
-// } 
 
+// using api_ai small talk as intro
+function processMessage(event) {
+	const senderId = event.sender.id;
+	const message = event.message.text;
+
+	const apiaiSession = apiAiClient.textRequest(message, {sessionId: 'fred-talks'});
+
+	apiaiSession.on('response', {
+		const result = response.result.fulfillment.speech;
+		sendTextMessage(senderId, result);
+	});
+
+	apiaiSession.on('error', console.log(error));
+	apiaiSession.end();
+}
 
 function receivedMessage(event) {
   var senderID = event.sender.id;

@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 const token = process.env.FB_PAGE_ACCESS_TOKEN
+const apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -65,9 +66,9 @@ function processMessage(event) {
 
 	const apiaiSession = apiAiClient.textRequest(message, {sessionId: 'fred-talks'});
 
-	apiaiSession.on('response', {
+	apiaiSession.on('response', ({
 		const result = response.result.fulfillment.speech;
-		sendTextMessage(senderId, result);
+		sendTextMessage(senderId, result);)
 	});
 
 	apiaiSession.on('error', console.log(error));

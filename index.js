@@ -64,14 +64,16 @@ function processMessage(event) {
 	const senderId = event.sender.id;
 	const message = event.message.text;
 
-	const apiaiSession = apiAiClient.textRequest(message, {sessionId: 'small-talk-6d25f'});
+	const apiaiSession = apiAiClient.textRequest(message, {sessionId: 'fred-talks'});
 
-	apiaiSession.on('response', ({
+	apiaiSession.on('response', (response) => {
 		const result = response.result.fulfillment.speech;
-		sendTextMessage(senderId, result);)
+		sendTextMessage(senderId, result);
 	});
 
-	apiaiSession.on('error', console.log(error));
+	apiaiSession.on('error', (error) => {
+		console.log(error);
+	});
 	apiaiSession.end();
 }
 

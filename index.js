@@ -64,7 +64,7 @@ function processMessage(event) {
 	const senderId = event.sender.id;
 	const message = event.message.text;
 
-	const apiaiSession = apiAiClient.textRequest(message, {sessionId: 'fred-talks'});
+	const apiaiSession = apiAiClient.textRequest(message, {sessionId: 'small-talk-6d25f'});
 
 	apiaiSession.on('response', ({
 		const result = response.result.fulfillment.speech;

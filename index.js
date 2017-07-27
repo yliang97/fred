@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 const token = process.env.FB_PAGE_ACCESS_TOKEN
-const apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
+var apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -33,8 +33,6 @@ app.post('/webhook', function (req, res) {
 
   // Make sure this is a page subscription
   if (data.object === 'page') {
-
-
     // Iterate over each entry - there may be multiple if batched
     data.entry.forEach(function(entry) {
       var pageID = entry.id;
@@ -59,7 +57,7 @@ app.post('/webhook', function (req, res) {
   }
 });
 
-// using api_ai small talk as intro
+// using api_ai small talk as intro, continue to refine small talk here...note that functionality is not that great
 function processMessage(event) {
 	const senderId = event.sender.id;
 	const message = event.message.text;
@@ -205,9 +203,14 @@ function receivedPostback(event) {
   console.log("Received postback for user %d and page %d with payload '%s' " + 
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
-  // When a postback is called, we'll send a message back to the sender to 
-  // let them know it was successful
-  sendTextMessage(senderID, "Postback called");
+  // If payload is Princeton, use princeton bot
+  if (payload == "PRINCETON") {
+  	apiAiClient = require('apiai')(process.env.APIAI_PRINCETON_TOKEN)
+  }
+  else if (payload == "GENERIC") {
+  	apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
+  }
+  sendTextMessage(senderID, "Postback called. Proceed with chat");
 }
 
 

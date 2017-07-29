@@ -28,6 +28,7 @@ app.get('/webhook/', function (req, res) {
 	res.send('Error, wrong token')
 })
 
+// message webhook
 app.post('/webhook', function (req, res) {
   var data = req.body;
 
@@ -41,8 +42,15 @@ app.post('/webhook', function (req, res) {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
         if (event.message) {
+
+       	  // trying out built in nlp
+      	  const greeting = firstEntity(event.message.nlp, 'greeting');
+      	  if (greeting && greeting.confidence > 0.8) {
+      	  	sendTextMessage(event.sender.id, 'Hello!');
+      	  }
+      	  else
           //receivedMessage(event);
-          processMessage(event);
+          	processMessage(event); // this is using api.ai ... but switching to wit.ai
         } else if (event.postback) {
           receivedPostback(event);
         }
@@ -56,6 +64,12 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
   }
 });
+
+// built in nlp capabilities for FB
+function firstEntity(nlp, name) {
+  return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
+}
+
 
 // using api_ai small talk as intro, continue to refine small talk here...note that functionality is not that great
 function processMessage(event) {
@@ -209,6 +223,9 @@ function receivedPostback(event) {
   }
   else if (payload == "GENERIC") {
   	apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
+  }
+  else if (payload == "GET_STARTED_PAYLOAD") {
+  	sendTextMessage(senderID, "Get started by chatting with me, or choosing something from the menu")
   }
   sendTextMessage(senderID, "Postback called. Proceed with chat");
 }

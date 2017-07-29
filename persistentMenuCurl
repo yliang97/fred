@@ -1,0 +1,105 @@
+curl -X POST -H "Content-Type: application/json" -d '{
+  "persistent_menu":[
+    {
+      "locale":"default",
+      "composer_input_disabled":true,
+      "call_to_actions":[
+        {
+          "title":"Princeton",
+          "type":"nested",
+          "call_to_actions":[
+            {
+              "title":"Real Talk Princeton",
+              "type":"web_url",
+              "url":"https://realtalk-princeton.tumblr.com/"
+              "webview_height_ratio":"full"
+            },
+            {
+              "title":"Princeton Courses",
+              "type":"web_url",
+              "url":"https://www.princetoncourses.com"
+              "webview_height_ratio":"full"
+            },
+            {
+              "title":"Questions?",
+              "type":"postback",
+              "payload":"PRINCETON"
+            }
+          ]
+        },
+        {
+          "type":"web_url",
+          "title":"Real Talk Princeton",
+          "url":"https://realtalk-princeton.tumblr.com/"
+          "webview_height_ratio":"full"
+        }
+      ]
+    },
+    {
+      "locale":"zh_CN",
+      "composer_input_disabled":false
+    }
+  ]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAASAh4xToDEBAJu5VtNP7ZC75SoOKnvLtQf46107hNkvqj9ct8QYBrPdDlyseffQOB0AjzZB3ZBbH44pZAV0i8XLKGZCneGtxORIlgZCYivTKwnj1KvE0bCNIK5W46YQXL0cutJEtFStkcGieNVrbLXVEZAhaNV9zWfxYjZCfH4ingZDZD"
+
+curl -X GET "https://graph.facebook.com/v2.6/me/messenger_profile?fields=persistent_menu&access_token=EAASAh4xToDEBAJu5VtNP7ZC75SoOKnvLtQf46107hNkvqj9ct8QYBrPdDlyseffQOB0AjzZB3ZBbH44pZAV0i8XLKGZCneGtxORIlgZCYivTKwnj1KvE0bCNIK5W46YQXL0cutJEtFStkcGieNVrbLXVEZAhaNV9zWfxYjZCfH4ingZDZD"    
+
+curl -X DELETE -H "Content-Type: application/json" -d '{
+  "fields":[
+    "persistent_menu"
+  ]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAASAh4xToDEBAJu5VtNP7ZC75SoOKnvLtQf46107hNkvqj9ct8QYBrPdDlyseffQOB0AjzZB3ZBbH44pZAV0i8XLKGZCneGtxORIlgZCYivTKwnj1KvE0bCNIK5W46YQXL0cutJEtFStkcGieNVrbLXVEZAhaNV9zWfxYjZCfH4ingZDZD"  
+
+
+
+
+
+-----------------------------------
+
+
+curl -X POST -H "Content-Type: application/json" -d '{
+  "persistent_menu":[
+    {
+      "locale":"default",
+      "composer_input_disabled":false,
+      "call_to_actions":[
+        {
+          "title":"Princeton",
+          "type":"nested",
+          "call_to_actions":[
+            {
+              "title":"General Questions",
+              "type":"postback",
+              "payload":"PRINCETON"
+            },
+            {
+              "title":"Classes",
+              "type":"postback",
+              "payload":"PRINCETON"
+            },
+            {
+              "title":"Campus Life",
+              "type":"postback",
+              "payload":"PRINCETON"
+            }
+          ]
+        },
+        {
+          "type":"web_url",
+          "title":"Real Talk Princeton",
+          "url":"https://realtalk-princeton.tumblr.com/",
+          "webview_height_ratio":"full"
+        },
+        {
+          "type":"postback",
+          "title":"small talk",
+          "payload":"GENERIC"
+        }
+      ]
+    },
+    {
+      "locale":"zh_CN",
+      "composer_input_disabled":false
+    }
+  ]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAASAh4xToDEBAJu5VtNP7ZC75SoOKnvLtQf46107hNkvqj9ct8QYBrPdDlyseffQOB0AjzZB3ZBbH44pZAV0i8XLKGZCneGtxORIlgZCYivTKwnj1KvE0bCNIK5W46YQXL0cutJEtFStkcGieNVrbLXVEZAhaNV9zWfxYjZCfH4ingZDZD"

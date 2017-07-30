@@ -92,7 +92,7 @@ function handleMessage(senderID, message) {
 		else
 			sendTextMessage(senderID, 'Failed to recognize command, try again');
 	}
-	else sendTextMessage(senderID, 'Failed to recognize command, try again');
+	else sendTextMessage(senderID, 'You are searching for' + intent.value + ' ' + intent.confidence);
 
 }
 

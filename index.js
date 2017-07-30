@@ -78,18 +78,16 @@ app.post('/webhook', function (req, res) {
 // }
 
 function firstEntity(nlp, name, senderID) {
-  //sendTextMessage(senderID, JSON.stringify(nlp && nlp.entities));
-  sendTextMessage(senderID, JSON.stringify(nlp && nlp.entities[name][0]));
-  //sendTextMessage(senderID, JSON.stringify(nlp && nlp.entities && nlp.entities[name]));
   return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 
 function handleMessage(senderID, message) {
 	
     // check greeting is here and is confident
-    // const greeting = firstEntity(message.nlp, 'greetings', senderID);
-    // sendTextMessage(senderID, JSON.stringify(greeting));
-     const location = firstEntity(message.nlp, 'location', senderID);
+    const greeting = firstEntity(message.nlp, 'greetings', senderID);
+    sendTextMessage(senderID, JSON.stringify(greeting));
+    sendTextMessage(senderID, JSON.stringify(greeting.confidence));
+    // const location = firstEntity(message.nlp, 'location', senderID);
     //sendTextMessage(senderID, 'Check to see if this works ' + (JSON.stringify(greeting)));
     if (greeting && greeting.confidence > 0.8) {
       sendTextMessage(senderID, 'Hi there!');

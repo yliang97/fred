@@ -42,15 +42,8 @@ app.post('/webhook', function (req, res) {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
         if (event.message) {
-
-       	  // trying out built in nlp
-      	  const greeting = firstEntity(event.message.nlp, 'greeting');
-      	  if (greeting && greeting.confidence > 0.8) {
-      	  	sendTextMessage(event.sender.id, 'Hello!');
-      	  }
-      	  else
-          //receivedMessage(event);
-          	processMessage(event); // this is using api.ai ... but switching to wit.ai
+          receivedMessage(event);
+          //processMessage(event); // this is using api.ai ... but switching to wit.ai
         } else if (event.postback) {
           receivedPostback(event);
         }
@@ -65,29 +58,43 @@ app.post('/webhook', function (req, res) {
   }
 });
 
-// built in nlp capabilities for FB
+
+// using api_ai small talk as intro, continue to refine small talk here...note that functionality is not that great - not using it for now so I can focus on wit.ai
+// function processMessage(event) {
+// 	const senderId = event.sender.id;
+// 	const message = event.message.text;
+
+// 	const apiaiSession = apiAiClient.textRequest(message, {sessionId: 'fred-talks'});
+
+// 	apiaiSession.on('response', (response) => {
+// 		const result = response.result.fulfillment.speech;
+// 		sendTextMessage(senderId, result);
+// 	});
+
+// 	apiaiSession.on('error', (error) => {
+// 		console.log(error);
+// 	});
+// 	apiaiSession.end();
+// }
+
 function firstEntity(nlp, name) {
   return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 
+function handleMessage(senderID, message) {
+	const intent = firstEntity(message.nlp, 'intent');
+	// check if they want us to get the location
+	if (intent && intent.confidence > 0.8) {
+		const location = firstEntity(message.nlp, 'location');
+		if (location && location.confidence > 0.8)
+			sendTextMessage(senderID, 'The location of ' + location.value + 'is https://www.google.com/maps/place/' + location.value);
+		else
+			sendTextMessage(senderID, 'Failed to recognize command, try again');
+	}
+	else sendTextMessage(senderID, 'Failed to recognize command, try again');
 
-// using api_ai small talk as intro, continue to refine small talk here...note that functionality is not that great
-function processMessage(event) {
-	const senderId = event.sender.id;
-	const message = event.message.text;
-
-	const apiaiSession = apiAiClient.textRequest(message, {sessionId: 'fred-talks'});
-
-	apiaiSession.on('response', (response) => {
-		const result = response.result.fulfillment.speech;
-		sendTextMessage(senderId, result);
-	});
-
-	apiaiSession.on('error', (error) => {
-		console.log(error);
-	});
-	apiaiSession.end();
 }
+
 
 function receivedMessage(event) {
   var senderID = event.sender.id;
@@ -114,7 +121,7 @@ function receivedMessage(event) {
         break;
 
       default:
-        sendTextMessage(senderID, messageText);
+        handleMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");

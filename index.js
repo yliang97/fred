@@ -87,8 +87,8 @@ function handleMessage(senderID, message) {
 	if (intent && intent.confidence > 0.8) {
 		const location = firstEntity(message.nlp, 'location');
 		if (location && location.confidence > 0.8)
-			//sendTextMessage(senderID, '' + location.value + ' ' + location.confidence);
-			sendTextMessage(senderID, 'The location of ' + location.value + 'is https://www.google.com/maps/place/' + location.value);
+			sendTextMessage(senderID, 'You are searching for' + location.value + ' ' + location.confidence);
+			//sendTextMessage(senderID, 'The location of ' + location.value + 'is https://www.google.com/maps/place/' + location.value);
 		else
 			sendTextMessage(senderID, 'Failed to recognize command, try again');
 	}

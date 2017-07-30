@@ -83,7 +83,7 @@ function firstEntity(nlp, name) {
 
 function handleMessage(senderID, message) {
 	const intent = firstEntity(message.nlp, 'intent');
-	console.log('print out intent stuff ' + intent.confidence);
+	console.log('print out intent stuff ');
 	// check if they want us to get the location
 	if (intent && intent.confidence > 0.8) {
 		const location = firstEntity(message.nlp, 'location');

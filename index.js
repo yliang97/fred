@@ -81,7 +81,7 @@ function firstEntity(nlp, name) {
   return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 
-function handleMessage(senderID, nlp) {
+function handleMessage(senderID, message) {
 
     // check greeting is here and is confident
     const greeting = firstEntity(message.nlp, 'greeting');

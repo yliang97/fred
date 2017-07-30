@@ -83,17 +83,26 @@ function firstEntity(nlp, name) {
 
 function handleMessage(senderID, message) {
 	const intent = firstEntity(message.nlp, 'greeting');
-	// check if they want us to get the location
-	if (intent && intent.confidence > 0.8) {
-		sendTextMessage(senderID, 'this went through');
-		const location = firstEntity(message.nlp, 'location');
-		if (location && location.confidence > 0.8)
-			sendTextMessage(senderID, 'You are searching for');
-			//sendTextMessage(senderID, 'The location of ' + location.value + 'is https://www.google.com/maps/place/' + location.value);
-		else
-			sendTextMessage(senderID, 'Failed to recognize command, try again');
-	}
-	else sendTextMessage(senderID, 'Your query failed');
+
+
+    // check greeting is here and is confident
+    const greeting = firstEntity(message.nlp, 'greeting');
+    if (greeting && greeting.confidence > 0.8) {
+      sendTextMessage(senderID, 'Hi there!');
+    } else { 
+     // default logic
+     sendTextMessage(senderID, 'Can you say that again?');
+    }
+	// if (intent && intent.confidence > 0.8) {
+	// 	sendTextMessage(senderID, 'this went through');
+	// 	const location = firstEntity(message.nlp, 'location');
+	// 	if (location && location.confidence > 0.8)
+	// 		sendTextMessage(senderID, 'You are searching for');
+	// 		//sendTextMessage(senderID, 'The location of ' + location.value + 'is https://www.google.com/maps/place/' + location.value);
+	// 	else
+	// 		sendTextMessage(senderID, 'Failed to recognize command, try again');
+	// }
+	// else sendTextMessage(senderID, 'Your query failed');
 
 }
 

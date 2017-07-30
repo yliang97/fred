@@ -77,15 +77,16 @@ app.post('/webhook', function (req, res) {
 // 	apiaiSession.end();
 // }
 
-function firstEntity(nlp, name) {
+function firstEntity(nlp, name, senderID) {
+  sendTextMessage(senderID, JSON.stringify(nlp.entitites));
   return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 
 function handleMessage(senderID, message) {
 	
     // check greeting is here and is confident
-    const greeting = firstEntity(message.nlp, 'greetings');
-    sendTextMessage(senderID, 'Check to see if this works ' + (JSON.stringify(greeting)));
+    const greeting = firstEntity(message.nlp, 'greetings', senderID);
+    //sendTextMessage(senderID, 'Check to see if this works ' + (JSON.stringify(greeting)));
     if (greeting && greeting.confidence > 0.8) {
       sendTextMessage(senderID, 'Hi there!');
     } else { 

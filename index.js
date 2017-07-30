@@ -82,7 +82,7 @@ function firstEntity(nlp, name) {
 }
 
 function handleMessage(senderID, message) {
-	sendTextMessage(senderID, 'Check to see if this works' + (message.nlp != null));
+	sendTextMessage(senderID, 'Check to see if this works ' + (json.stringify(message.nlp)));
     // check greeting is here and is confident
     const greeting = firstEntity(message.nlp, 'greeting');
     if (greeting && greeting.confidence > 0.8) {

@@ -82,8 +82,6 @@ function firstEntity(nlp, name) {
 }
 
 function handleMessage(senderID, nlp) {
-	const intent = firstEntity(nlp, 'greeting');
-
 
     // check greeting is here and is confident
     const greeting = firstEntity(message.nlp, 'greeting');
@@ -112,7 +110,6 @@ function receivedMessage(event) {
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
-  var nlp = event.nlp;
 
   console.log("Received message for user %d and page %d at %d with message:", 
     senderID, recipientID, timeOfMessage);
@@ -133,7 +130,7 @@ function receivedMessage(event) {
         break;
 
       default:
-        handleMessage(senderID, nlp);
+        handleMessage(senderID, message);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");

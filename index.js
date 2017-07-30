@@ -82,6 +82,7 @@ function firstEntity(nlp, name) {
 }
 
 function handleMessage(senderID, message) {
+	sendTextMessage(senderID, 'Message recieved');
 	const intent = firstEntity(message.nlp, 'intent');
 	sendTextMessage(senderId, '' + intent);
 	// check if they want us to get the location

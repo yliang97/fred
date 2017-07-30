@@ -86,6 +86,10 @@ function handleMessage(senderID, message) {
     // check greeting is here and is confident
     const greeting = firstEntity(message.nlp, 'greetings', senderID);
     sendTextMessage(senderID, JSON.stringify(greeting));
+    for (var key in greeting) {
+    	sendTextMessage(senderID, JSON.stringify(key));
+    	sendTextMessage(senderID, JSON.stringify(greeting[key]));
+    }
 
     // sendTextMessage(senderID, JSON.stringify(greeting.confidence));
     // sendTextMessage(senderID, JSON.stringify(greeting.value));

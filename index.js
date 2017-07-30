@@ -78,7 +78,7 @@ app.post('/webhook', function (req, res) {
 // }
 
 function firstEntity(nlp, name, senderID) {
-  sendTextMessage(senderID, JSON.stringify(nlp.entitites));
+  sendTextMessage(senderID, JSON.stringify(nlp.entities));
   return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 

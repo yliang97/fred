@@ -84,12 +84,12 @@ function firstEntity(nlp, name, senderID) {
 function handleMessage(senderID, message) {
 	
     // check greeting is here and is confident
-    const greeting = firstEntity(message.nlp, 'greetings', senderID);
+    // const greeting = firstEntity(message.nlp, 'greetings', senderID);
     nlp = message.nlp;
     entities = nlp.entities;
     location = entities.location;
     greeting = entities.greetings;
-    sendTextMessage(senderID, JSON.stringify(location) + "\n"  + JSON.stringify(greeting));
+    sendTextMessage(senderID, JSON.stringify(location) + JSON.stringify(greeting));
 
     // sendTextMessage(senderID, JSON.stringify(greeting.confidence));
     // sendTextMessage(senderID, JSON.stringify(greeting.value));

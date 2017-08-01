@@ -85,8 +85,7 @@ function handleMessage(senderID, message) {
 	
     // check greeting is here and is confident
     // const greeting = firstEntity(message.nlp, 'greetings', senderID);
-    var msg = JSON.parse(message);
-    var nlp = msg.nlp;
+    var nlp = message.nlp;
     var entities = nlp.entities;
     var location = entities.location[0];
     var greeting = entities.greetings[0];

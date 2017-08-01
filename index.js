@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
-const token = process.env.FB_PAGE_ACCESS_TOKEN
+const FB_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN
 var apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
 
 app.set('port', (process.env.PORT || 5000))
@@ -85,7 +85,7 @@ function handleMessage(senderID, message) {
 	
     // check greeting is here and is confident
 	const greeting = firstEntity(message.nlp, 'greeting');
-	console.log(greeting);
+	// console.log(JSON.stringify(greeting));
     if (greeting && greeting.confidence > 0.8) {
       sendTextMessage(senderID, 'Hi there!');
     } else { 
@@ -202,7 +202,7 @@ function sendTextMessage(recipientId, messageText) {
 function callSendAPI(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: token},
+    qs: { access_token: FB_TOKEN},
     method: 'POST',
     json: messageData
 

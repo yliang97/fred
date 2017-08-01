@@ -88,7 +88,7 @@ function handleMessage(senderID, message) {
 	console.log(JSON.stringify(greeting));
 	// console.log(JSON.stringify(greeting.value));
     if (greeting && greeting.confidence > 0.8) {
-      sendTextMessage(senderID, 'Hi there! ');
+      sendTextMessage(senderID, 'Hi there! ' + JSON.stringify(greeting.value));
     } else { 
      // default logic
      sendTextMessage(senderID, 'Can you say that again?');

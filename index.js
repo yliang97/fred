@@ -87,7 +87,7 @@ function handleMessage(senderID, message) {
     // const greeting = firstEntity(message.nlp, 'greetings', senderID);
     var nlp = message.nlp;
     var entities = nlp.entities;
-    sendTextMessage(senderID, JSON.stringify((message.nlp).entities));
+    sendTextMessage(senderID, JSON.stringify(message.nlp));
 
     // sendTextMessage(senderID, JSON.stringify(greeting.confidence));
     // sendTextMessage(senderID, JSON.stringify(greeting.value));

@@ -85,7 +85,7 @@ function handleMessage(senderID, message) {
 	
     // check greeting is here and is confident
 	const greeting = firstEntity(message.nlp, 'greeting');
-	window.alert(greeting);
+	console.log(greeting);
     if (greeting && greeting.confidence > 0.8) {
       sendTextMessage(senderID, 'Hi there!');
     } else { 

@@ -89,7 +89,7 @@ function handleMessage(senderID, message) {
     entities = nlp.entities;
     location = entities.location[0];
     greeting = entities.greetings[0];
-    sendTextMessage(senderID, JSON.stringify(location) + JSON.stringify(greeting));
+    sendTextMessage(senderID, JSON.stringify(((message.nlp).entities).location[0]));
 
     // sendTextMessage(senderID, JSON.stringify(greeting.confidence));
     // sendTextMessage(senderID, JSON.stringify(greeting.value));

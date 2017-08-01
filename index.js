@@ -85,9 +85,8 @@ function handleMessage(senderID, message) {
 	
     // check greeting is here and is confident
     // c    var nlp = message.nlp;
-    nlp = message.nlp;
-    location = nlp.location;
-    sendTextMessage(senderID, JSON.stringify(location));
+    const nlp = message.nlp;
+    sendTextMessage(senderID, JSON.stringify(nlp.entities));
 
     // sendTextMessage(senderID, JSON.stringify(greeting.confidence));
     // sendTextMessage(senderID, JSON.stringify(greeting.value));

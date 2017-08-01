@@ -87,8 +87,8 @@ function handleMessage(senderID, message) {
     // const greeting = firstEntity(message.nlp, 'greetings', senderID);
     nlp = message.nlp;
     entities = nlp.entities;
-    location = entities.location;
-    greeting = entities.greetings;
+    location = entities.location[0];
+    greeting = entities.greetings[0];
     sendTextMessage(senderID, JSON.stringify(location) + JSON.stringify(greeting));
 
     // sendTextMessage(senderID, JSON.stringify(greeting.confidence));

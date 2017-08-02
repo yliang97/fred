@@ -75,12 +75,12 @@ curl -X POST -H "Content-Type: application/json" -d '{
             {
               "title":"Classes",
               "type":"postback",
-              "payload":"PRINCETON"
+              "payload":"CLASSES"
             },
             {
               "title":"Campus Life",
               "type":"postback",
-              "payload":"PRINCETON"
+              "payload":"LIFE"
             }
           ]
         },

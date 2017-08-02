@@ -85,7 +85,7 @@ function handleMessage(senderID, message) {
 	
     // check greeting is here and is confident
 	const greeting = firstEntity(message.nlp, 'greetings');
-  const location_get = firstEntity(message.nlp, 'location-get');
+  const location_get = firstEntity(message.nlp, 'location_get');
   const location = firstEntity(message.nlp, 'location');
   console.log(JSON.stringify(location_get));
   console.log(JSON.stringify(location));
@@ -93,8 +93,7 @@ function handleMessage(senderID, message) {
     if (greeting && greeting.confidence > 0.8) {
       sendTextMessage(senderID, 'Hi there! ');
     } 
-    else if (location_get && location_get.confidence > 0.8) {
-      if (location && location.confidence > 0.8)
+    else if (location_get && location_get.confidence > 0.8 && location && location.confidence > 0.8) {
         sendTextMessage(senderID, 'The location is here: www.google.com/maps/place/' + JSON.stringify(location.value));
     }
     else { 

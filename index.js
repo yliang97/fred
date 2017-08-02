@@ -87,14 +87,12 @@ function handleMessage(senderID, message) {
 	const greeting = firstEntity(message.nlp, 'greetings');
   const location_get = firstEntity(message.nlp, 'location_get');
   const location = firstEntity(message.nlp, 'location');
-  console.log(JSON.stringify(location_get));
-  console.log(JSON.stringify(location));
 	// console.log(JSON.stringify(greeting.value));
     if (greeting && greeting.confidence > 0.8) {
       sendTextMessage(senderID, 'Hi there! ');
     } 
     else if (location_get && location_get.confidence > 0.8 && location && location.confidence > 0.8) {
-        sendTextMessage(senderID, 'The location is here: www.google.com/maps/place/' + location.value);
+        sendTextMessage(senderID, 'The location is here: www.google.com/maps/place/' + (location.value).replace(/\s+/g, '_'));
     }
     else { 
      // default logic

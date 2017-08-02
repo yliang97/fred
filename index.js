@@ -6,7 +6,7 @@ const request = require('request')
 const app = express()
 const FB_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN
 var apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
-var $ = require('jQuery');
+var $ = require('jquery');
 
 // booleans to determine which state the chatbot is in
 var GENERAL_QUESTIONS = false;

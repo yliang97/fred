@@ -6,7 +6,7 @@ const request = require('request')
 const app = express()
 const FB_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN
 var apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
-var $ = require('jquery');
+var jquery = require('jquery');
 
 // booleans to determine which state the chatbot is in
 var GENERAL_QUESTIONS = false;
@@ -127,7 +127,7 @@ function receivedMessage(event) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the example. Otherwise, just echo the text we received.
     if (GENERAL_QUESTIONS == true) {
-      var response = $.getScript('../bot_v1/princeton_general.js', function(){
+      var response = jQuery.getScript('../bot_v1/princeton_general.js', function(){
         answerGeneric(senderID, message);
       });
       callSendAPI(response); 

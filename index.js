@@ -85,25 +85,19 @@ function handleMessage(senderID, message) {
 	
     // check greeting is here and is confident
 	const greeting = firstEntity(message.nlp, 'greetings');
-	console.log(JSON.stringify(greeting));
+  const location_get = firstEntity(message.nlp, 'location-get');
+  const location = firstEntity(message.nlp, 'location');
 	// console.log(JSON.stringify(greeting.value));
     if (greeting && greeting.confidence > 0.8) {
-      sendTextMessage(senderID, 'Hi there! ' + JSON.stringify(greeting.value));
-    } else { 
-     // default logic
-     sendTextMessage(senderID, 'Can you say that again?');
+      sendTextMessage(senderID, 'Hi there! ');
+    } 
+    else if (location_get && location_get.confidence > 0.8 && location && location.confidence > 0.8) {
+      sendTextMessage(senderID, 'The location is here: www.google.com/maps/place/' + JSON.stringify(location.value));
     }
-	// if (intent && intent.confidence > 0.8) {
-	// 	sendTextMessage(senderID, 'this went through');
-	// 	const location = firstEntity(message.nlp, 'location');
-	// 	if (location && location.confidence > 0.8)
-	// 		sendTextMessage(senderID, 'You are searching for');
-	// 		//sendTextMessage(senderID, 'The location of ' + location.value + 'is https://www.google.com/maps/place/' + location.value);
-	// 	else
-	// 		sendTextMessage(senderID, 'Failed to recognize command, try again');
-	// }
-	// else sendTextMessage(senderID, 'Your query failed');
-
+    else { 
+     // default logic
+     sendTextMessage(senderID, 'Can you say that again, or be more specific?');
+    }
 }
 
 

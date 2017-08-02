@@ -3,10 +3,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-const jquery = require('jquery')
 const app = express()
 const FB_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN
 var apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
+const princeton_general= require('../bot_v1/princeton_general.js');
 
 
 // booleans to determine which state the chatbot is in
@@ -128,11 +128,7 @@ function receivedMessage(event) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the example. Otherwise, just echo the text we received.
     if (GENERAL_QUESTIONS == true) {
-      var response = jquery(document).ready(function() {
-        jquery.getScript('../bot_v1/princeton_general.js', function(){
-        answerGeneric(senderID, message);
-        });
-      });
+      var response = princeton_general.answerGeneric();
       callSendAPI(response); 
     }
     else 

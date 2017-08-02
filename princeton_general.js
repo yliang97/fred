@@ -3,7 +3,7 @@
 
 
 // generic princeton questions
-function answerGeneric(senderID, message) {
+exports.answerGeneric(senderID, message) = function(senderID, message) {
 	return sendTextMessage(senderID, "Message received");
 }
 

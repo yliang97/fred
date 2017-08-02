@@ -125,18 +125,17 @@ function receivedMessage(event) {
     console.log(GENERAL_QUESTIONS);
     // If we receive a text message, check to see if it matches a keyword
     // and send back the example. Otherwise, just echo the text we received.
-    switch (messageText) {
-      case (GENERAL_QUESTIONS == true):
-        var response = jQuery.getScript('../bot_v1/princeton_general.js', function(){
-          answerGeneric(senderID, message);
-        });
-        callSendAPI(response); 
-      default:
-      	// sendTextMessage(senderID, messageText);
-        handleMessage(senderID, message);
+    if (GENERAL_QUESTIONS == true) {
+      var response = jQuery.getScript('../bot_v1/princeton_general.js', function(){
+        answerGeneric(senderID, message);
+      });
+      callSendAPI(response); 
     }
+    else 
+      handleMessage(senderID, message);
+    
   } else if (messageAttachments) {
-    sendTextMessage(senderID, "Thanks for sending, but we currently do not support this functionality.");
+      sendTextMessage(senderID, "Thanks for sending, but we currently do not support this functionality.");
   }
 }
 

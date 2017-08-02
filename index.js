@@ -94,7 +94,7 @@ function handleMessage(senderID, message) {
       sendTextMessage(senderID, 'Hi there! ');
     } 
     else if (location_get && location_get.confidence > 0.8 && location && location.confidence > 0.8) {
-        sendTextMessage(senderID, 'The location is here: www.google.com/maps/place/' + JSON.stringify(location.value));
+        sendTextMessage(senderID, 'The location is here: www.google.com/maps/place/' + location.value);
     }
     else { 
      // default logic

@@ -192,21 +192,21 @@ function receivedPostback(event) {
   // If payload is Princeton, use princeton bot
   if (payload == "PRINCETON") {
   	sendTextMessage(senderID, "Great let's get started! What sort of generic questions do you have?");
-    var GENERAL_QUESTIONS = true;
-    var CLASSES = false;
-    var CAMPUS_LIFE = false;
+    GENERAL_QUESTIONS = true;
+    CLASSES = false;
+    CAMPUS_LIFE = false;
   }
   else if (payload == "CLASSES") {
     sendTextMessage(senderID, "Great let's get started! Whaat questions do you have about classes?");
-    var GENERAL_QUESTIONS = false;
-    var CLASSES = true;
-    var CAMPUS_LIFE = false;    
+    GENERAL_QUESTIONS = false;
+    CLASSES = true;
+    CAMPUS_LIFE = false;    
   }
   else if (payload == "LIFE") {
     sendTextMessage(senderID, "What's up! Let's talk about campus life - any questions?");
-    var GENERAL_QUESTIONS = true;
-    var CLASSES = false;
-    var CAMPUS_LIFE = false;
+    GENERAL_QUESTIONS = true;
+    CLASSES = false;
+    CAMPUS_LIFE = false;
   }
   else if (payload == "GENERIC") {
   	apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
@@ -214,7 +214,6 @@ function receivedPostback(event) {
   else if (payload == "GET_STARTED_PAYLOAD") {
   	sendTextMessage(senderID, "Get started by chatting with me, or choosing something from the menu")
   }
-  sendTextMessage(senderID, "Postback called. Proceed with chat");
 }
 
 

@@ -11,6 +11,9 @@ exports.interpretGeneric = function(senderID, message) {
 	const social = firstEntity(message.nlp, 'princeton-general-social');
 	const admission = firstEntity(message.nlp, 'location-general-admission');
 	const general = firstEntity(message.nlp, 'princeton-general');
+	console.log(social);
+	console.log(admission);
+	console.log(general);
 	if (general && general.confidence > 0.8) {
 		if (social && social.confidence > 0.8)
 			return sendTextMessage(senderID, "If you are interested in social life on campus, please select the social life tab on the menu.");

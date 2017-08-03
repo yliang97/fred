@@ -15,7 +15,7 @@ exports.interpretGeneric = function(senderID, message) {
 		if (social && social.confidence > 0.8)
 			return sendTextMessage(senderID, "If you are interested in social life on campus, please select the social life tab on the menu.");
 		if (admission && admission.confidence > 0.8) {
-			return senderTextMessage(senderID, "For admission information...");
+			return sendTextMessage(senderID, "For admission information...");
 		}
 	}
 

@@ -5,7 +5,6 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 const FB_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN
-var apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
 const princeton_general= require('./princeton_general.js');
 
 
@@ -65,25 +64,7 @@ app.post('/webhook', function (req, res) {
   }
 });
 
-
-// using api_ai small talk as intro, continue to refine small talk here...note that functionality is not that great - not using it for now so I can focus on wit.ai
-// function processMessage(event) {
-// 	const senderId = event.sender.id;
-// 	const message = event.message.text;
-
-// 	const apiaiSession = apiAiClient.textRequest(message, {sessionId: 'fred-talks'});
-
-// 	apiaiSession.on('response', (response) => {
-// 		const result = response.result.fulfillment.speech;
-// 		sendTextMessage(senderId, result);
-// 	});
-
-// 	apiaiSession.on('error', (error) => {
-// 		console.log(error);
-// 	});
-// 	apiaiSession.end();
-// }
-
+// parses message.nlp to yield confidence and value
 function firstEntity(nlp, name) {
   return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }

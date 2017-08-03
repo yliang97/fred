@@ -8,9 +8,9 @@ function firstEntity(nlp, name) {
 
 // interprets the generic question by analyzing confidence for various entitites
 exports.interpretGeneric = function(senderID, message) {
-	const social = firstEntity(message.nlp, 'princeton-general-social');
-	const admission = firstEntity(message.nlp, 'location-general-admission');
-	const general = firstEntity(message.nlp, 'princeton-general');
+	const social = firstEntity(message.nlp, 'princeton_general_social');
+	const admission = firstEntity(message.nlp, 'princeton_general_admission');
+	const general = firstEntity(message.nlp, 'princeton_general');
 	console.log(social);
 	console.log(admission);
 	console.log(general);

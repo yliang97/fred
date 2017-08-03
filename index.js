@@ -6,7 +6,7 @@ const request = require('request')
 const app = express()
 const FB_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN
 var apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
-const princeton_general= require('princeton_general.js');
+const princeton_general= require('./princeton_general.js');
 
 
 // booleans to determine which state the chatbot is in

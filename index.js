@@ -106,12 +106,12 @@ function receivedMessage(event) {
 
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
-    // and send back the example. Otherwise, just echo the text we received.
-    // if (GENERAL_QUESTIONS == true) {
-    //   var response = princeton_general.interpretGeneric(senderID, message);
-    //   callSendAPI(response); 
-    // }
-    // else 
+    // and send back the example. Otherwise, choose the generic text version
+    if (GENERAL_QUESTIONS == true) {
+      var response = princeton_general.interpretGeneric(senderID, message);
+      callSendAPI(response); 
+    }
+    else 
       handleMessage(senderID, message);
     
   } else if (messageAttachments) {
@@ -188,7 +188,9 @@ function receivedPostback(event) {
     CAMPUS_LIFE = false;
   }
   else if (payload == "GENERIC") {
-  	apiAiClient = require('apiai')(process.env.APIAI_SMALLTALK_TOKEN)
+  	GENERAL_QUESTIONS = false;
+    CLASSES = false;
+    CAMPUS_LIFE = false;
   }
   else if (payload == "GET_STARTED_PAYLOAD") {
   	sendTextMessage(senderID, "Get started by chatting with me, or choosing something from the menu")

@@ -1,5 +1,5 @@
 // Practice with modular files to handle various states
-
+const admissionLink = "www.admission.princeton.edu/"
 
 // parses message.nlp to yield confidence and value
 function firstEntity(nlp, name) {
@@ -10,6 +10,7 @@ function firstEntity(nlp, name) {
 exports.interpretGeneric = function(senderID, message) {
 	const social = firstEntity(message.nlp, 'princeton_general_social');
 	const admission = firstEntity(message.nlp, 'princeton_general_admission');
+	const classes = firstEntity(message.nlp, 'princeton_general_classes')
 	const general = firstEntity(message.nlp, 'princeton_general');
 	console.log(social);
 	console.log(admission);
@@ -17,9 +18,10 @@ exports.interpretGeneric = function(senderID, message) {
 	if (general && general.confidence > 0.8) {
 		if (social && social.confidence > 0.8)
 			return sendTextMessage(senderID, "If you are interested in social life on campus, please select the social life tab on the menu.");
-		if (admission && admission.confidence > 0.8) {
-			return sendTextMessage(senderID, "For admission information...");
-		}
+		if (admission && admission.confidence > 0.8)
+			return sendTextMessage(senderID, "For admission information, please see " + admissionLink);
+		if (classes && classes.confidence > 0.8)
+			return sendTextMessage(senderID, "If you are interested in social life on campus, please select the social life tab on the menu.");
 	}
 
 

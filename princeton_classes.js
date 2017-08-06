@@ -10,9 +10,9 @@ exports.interpretClasses = function(senderID, message) {
 	if (general && general.confidence > threshold) {
 		const describe = firstEntity(message.nlp, 'princeton_classes_description');
 		if (describe && describe.confidence > threshold) {
-			return sendTextMessage(senderID, `Classes at Princeton range from a wide variety of subjects. Princeton offers 36 majors as well as many more certificates (minors), 
-				ranging from Computer Science to Portuguese. For more information, check out ` + academic_areas + `. You can also type in a subject, like "Computer Science
-				or "Portuguese" to learn more`);
+			return sendTextMessage(senderID, "Classes at Princeton range from a wide variety of subjects. Princeton offers 36 majors as well as many more certificates (minors), " + 
+				"ranging from Computer Science to Portuguese. For more information, check out " + academic_areas + ". You can also type in a subject, like 'Computer Science' " +
+				"or 'Portuguese' to learn more");
 
 		}
 	}

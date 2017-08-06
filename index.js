@@ -6,6 +6,8 @@ const request = require('request')
 const app = express()
 const FB_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN
 const princeton_general= require('./princeton_general.js');
+const princeton_classes= require('./princeton_general.js');
+const threshold = 0.8;
 
 
 // booleans to determine which state the chatbot is in
@@ -76,10 +78,10 @@ function handleMessage(senderID, message) {
   const location_get = firstEntity(message.nlp, 'location_get');
   const location = firstEntity(message.nlp, 'location');
 	// console.log(JSON.stringify(greeting.value));
-    if (greeting && greeting.confidence > 0.8) {
+    if (greeting && greeting.confidence > threshold) {
       sendTextMessage(senderID, 'Hi there! ');
     } 
-    else if (location_get && location_get.confidence > 0.8 && location && location.confidence > 0.8) {
+    else if (location_get && location_get.confidence > threshold && location && location.confidence > threshold) {
         sendTextMessage(senderID, 'The location is here: www.google.com/maps/place/' + (location.value).replace(/\s+/g, '_'));
     }
     else { 
@@ -110,6 +112,10 @@ function receivedMessage(event) {
     if (GENERAL_QUESTIONS == true) {
       var response = princeton_general.interpretGeneric(senderID, message);
       callSendAPI(response); 
+    }
+    else if (CLASSES == true){
+      var response = princeton_classes.interpretClasses(senderID, message);
+      callSendAPI(response);
     }
     else 
       handleMessage(senderID, message);

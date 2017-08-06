@@ -25,9 +25,9 @@ exports.interpretGeneric = function(senderID, message) {
 			return sendTextMessage(senderID, "If you are interested in how classes are, please select the classes tab on the menu.");
 		if (difficulty && difficulty.confidence > 0.8) {
 			if (difficulty.value == 'easy' || difficulty.value == 'simple')
-				sendTextMessage(senderID, "Princeton will be harder than you expect! Don't underestimate the difficulty of classes");
+				return sendTextMessage(senderID, "Princeton will be harder than you expect! Don't underestimate the difficulty of classes");
 			else if (difficulty.value == 'hard' || difficulty.value == 'difficult' || difficulty.value == 'strenuous')
-				sendTextMessage(senderID, "Yes, Princeton is hard. Yet don't be worred! Check the classes tab for more information about how to prepare.");
+				return sendTextMessage(senderID, "Yes, Princeton is hard. Yet don't be worred! Check the classes tab for more information about how to prepare.");
 		}
 
 	}

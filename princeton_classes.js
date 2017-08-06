@@ -15,13 +15,13 @@ exports.interpretClasses = function(senderID, message) {
 				"or 'Portuguese' to learn more");
 
 		}
-		const cos = firstEntity(message.nlp, 'princeton_classes_cos');
-		if (cos && cos.confidence > threshold) {
-			return sendTextMessage(senderID, "Since I am a chatbot, I am not biased in any sort of way. But COS is the best major out there. " + 
-				"If you are interested in becoming a COS major, I recommend you take COS 126, an introductory course that's taught in java. " +
-				"COS is a major both for AB and BSE students - the only difference between the two are AB and BSE requirements and the need for " +
-				" a senior thesis for AB students. BSE students must complete one semester of independent work and are not required to do a thesis.")
-		}
+	}
+	const cos = firstEntity(message.nlp, 'princeton_classes_cos');
+	if (cos && cos.confidence > threshold) {
+		return sendTextMessage(senderID, "Since I am a chatbot, I am not biased in any sort of way. But COS is the best major out there. " + 
+			"If you are interested in becoming a COS major, I recommend you take COS 126, an introductory course that's taught in java. " +
+			"COS is a major both for AB and BSE students - the only difference between the two are AB and BSE requirements and the need for " +
+			" a senior thesis for AB students. BSE students must complete one semester of independent work and are not required to do a thesis.")
 	}
 }
 

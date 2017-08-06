@@ -6,7 +6,7 @@ const request = require('request')
 const app = express()
 const FB_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN
 const princeton_general= require('./princeton_general.js');
-const princeton_classes= require('./princeton_general.js');
+const princeton_classes= require('./princeton_classes.js');
 const threshold = 0.8;
 
 

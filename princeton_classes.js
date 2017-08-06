@@ -5,7 +5,7 @@ function firstEntity(nlp, name) {
   return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 
-export.interpretClasses = function(senderID, message) {
+exports.interpretClasses = function(senderID, message) {
 	const general = firstEntity(message.nlp, 'princeton_classes');
 	if (general && general.confidence > threshold) {
 		const describe = firstEntity(message.nlp, 'princeton_classes_description');
